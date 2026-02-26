@@ -6,7 +6,7 @@ Linters: Ruff, Mypy
 
 Steps (DEV:
 1. Install UV
-2. uv sync and source .venv/bin/activate
+2. uv sync and source .venv/bin/activate or make install
 3. docker compose up -d
 4. python manage.py migrate
 5. python manage.py createsuperuser

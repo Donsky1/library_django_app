@@ -36,6 +36,8 @@ class BookSerializer(serializers.ModelSerializer[Author]):
 
 
 class LoanSerializer(serializers.ModelSerializer[Loan]):
+    duration = serializers.SerializerMethodField()
+
     class Meta:
         model = Loan
         fields = (
@@ -46,5 +48,13 @@ class LoanSerializer(serializers.ModelSerializer[Loan]):
             "returned_at",
             "created_at",
             "updated_at",
+            "duration",
         )
         read_only_fields = ("created_at", "updated_at", "duration_at")
+
+    def get_duration(self, obj: Loan) -> int | None:
+        if not obj.returned_at:
+            return None
+
+        diff = obj.returned_at.date() - obj.created_at.date()
+        return diff.days if diff.days else None

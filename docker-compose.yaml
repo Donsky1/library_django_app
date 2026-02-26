@@ -1,0 +1,22 @@
+services:
+  postgres:
+    container_name: library.django_app.postgres
+    image: postgres:15.1
+    env_file:
+      - compose/.envs/.local/.postgres
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d postgres_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    shm_size: 1g
+    restart: unless-stopped
+    command: >
+      -c work_mem=600MB
+      -c maintenance_work_mem=128MB
+      -c shared_buffers=256MB
+    ports:
+      - 5435:5432

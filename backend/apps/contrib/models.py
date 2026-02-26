@@ -1,16 +1,14 @@
 from uuid import uuid4
 
-from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.db import models
 
 from apps.contrib import managers
 
 
 class User(AbstractUser):
     username = None
-    uuid = models.UUIDField(
-        verbose_name="UUID", primary_key=True, default=uuid4, editable=False
-    )
+    uuid = models.UUIDField(verbose_name="UUID", primary_key=True, default=uuid4, editable=False)
     email = models.EmailField(verbose_name="E-mail", unique=True)
     first_name = models.CharField(verbose_name="Имя", max_length=32)
     last_name = models.CharField(verbose_name="Фамилия", max_length=32)

@@ -1,7 +1,7 @@
+from config import settings
 from django.db import models
 
 from apps.contrib.models import HistoryModel, SoftDeleteMixin
-from config import settings
 
 
 class Author(HistoryModel, SoftDeleteMixin):
@@ -26,7 +26,7 @@ class Book(HistoryModel, SoftDeleteMixin):
     description = models.TextField(blank=True, null=True)
 
     def __str__(self) -> str:
-        return self.title
+        return f"{self.title} ({self.author.last_name}. {self.author.first_name})"
 
     class Meta:
         verbose_name = "Book"
@@ -49,5 +49,3 @@ class Loan(HistoryModel):
         verbose_name = "Loan"
         verbose_name_plural = "Loans"
         db_table = "loan"
-
-

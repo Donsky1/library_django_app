@@ -1,6 +1,8 @@
 # library_django_app
 📚 Project: Library Management API: Django APP
 
+Stack + Libraries: Django, PostgreSQL, Docker Compose, DRF, JWT, DRF Spectacular, Psycopg2
+Linters: Ruff, Mypy
 
 Steps (DEV:
 1. Install UV
